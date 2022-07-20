@@ -1,6 +1,6 @@
 # eco_market_flutter
 
-A new Flutter project.
+A new Flutter project that I'm creating as a sample of concepts that I'm currently studying.
 
 ## Getting Started
 
