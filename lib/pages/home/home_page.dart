@@ -1,16 +1,29 @@
-import 'package:eco_market_flutter/pages/home/widgets/categorias_menu_widget.dart';
-import 'package:eco_market_flutter/pages/home/widgets/page_controller_widget.dart';
+import 'package:eco_market_flutter/models/Categoria.dart';
+import 'package:eco_market_flutter/repositories/CategoriaRepository.dart';
 import 'package:eco_market_flutter/services/auth_service.dart';
+//import 'package:eco_market_flutter/services/firebase_service.dart';
 import 'package:eco_market_flutter/themes/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
-    PageController pageController = PageController(initialPage: 0);
+    //PageController pageController = PageController(initialPage: 0);
+    List<Categoria> listaCategorias =
+        context.watch<CategoriaRepository>().categorias;
+    TabController tabController = TabController(
+      length: listaCategorias.length,
+      vsync: this,
+    );
+    //var db = context.watch<FirebaseService>().getAll();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAFAFA),
@@ -37,31 +50,32 @@ class HomePage extends StatelessWidget {
                     ),
                   ]),
         ],
+        bottom: TabBar(
+          isScrollable: true,
+          controller: tabController,
+          indicatorColor: colorSchemeLight.primary,
+          labelColor: Colors.black,
+          tabs: [
+            Tab(text: listaCategorias[0].nome),
+            Tab(text: listaCategorias[1].nome),
+            Tab(text: listaCategorias[2].nome),
+            Tab(text: listaCategorias[3].nome),
+            Tab(text: listaCategorias[4].nome),
+            Tab(text: listaCategorias[5].nome),
+            Tab(text: listaCategorias[6].nome),
+          ],
+        ),
       ),
-      body: Column(
+      body: TabBarView(
+        controller: tabController,
         children: [
-          const Padding(padding: EdgeInsets.all(4)),
-          CategoriasMenu(pageController: pageController),
-          Expanded(
-            child: Consumer<PageControllerNotifier>(
-                builder: ((context, value, child) {
-              return PageView(
-                controller: pageController,
-                onPageChanged: (int index) {
-                  value.changePage(index);
-                },
-                children: [
-                  Container(color: Colors.red),
-                  Container(color: Colors.blue),
-                  Container(color: Colors.green),
-                  Container(color: Colors.orange),
-                  Container(color: Colors.teal),
-                  Container(color: Colors.indigo),
-                  Container(color: Colors.black),
-                ],
-              );
-            })),
-          )
+          Container(color: Colors.red),
+          Container(color: Colors.blue),
+          Container(color: Colors.green),
+          Container(color: Colors.orange),
+          Container(color: Colors.teal),
+          Container(color: Colors.indigo),
+          Container(color: Colors.black),
         ],
       ),
     );
