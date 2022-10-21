@@ -5,10 +5,14 @@
 
 Eco Market App is a new POC project that I'm creating as a sample of concepts that I'm currently studying. Eco Market is a fictional market that sells healthy food and the idea is to be a full online shop that has registration, user authentication, shopping chart, buying, etc.
 
-In this project, im studying how to use Firebase solutions in a fictional market app.
+In this project, im studying how to use Firebase solutions to support the possible user actions within the app.
 
-Current using: Flutter and Firebase (Authentication and Cloud Firestore)
+## Technologies
+- Flutter
+- Firebase Authentication
+- Firebase Cloud Firestore
 
+## Demonstration
 Here you can see some of the screens of the app:
 Welcome Page      | Log In Page        | Home Page
 :----------------:|:------------------:|:----------------:
